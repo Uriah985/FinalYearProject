@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>program1</title>
+</head>
+<body>
+    <h1>Price finding program</h1>
+	<form action="/program1" method="post">
+	Please input the local address of the web store you want to find the price separetely
+	<br>
+	(Type 1 for Store 1, type 2 for Store 2, and type 3 for Store 3)
+	<br>
+	<input type="text" name="address">
+	<br>
+	Input the item name that you want to get the price
+    <div id="itemFields">
+        <input type="text" name="item_name[]">
+    </div>
+    <button type="button" onclick="addItemField()">Add another item</button>
+    <input type="submit" value="Run Program">
+</form>
+
+	<script>
+		function addItemField() {
+			var itemFields = document.getElementById('itemFields');
+			var newInput = document.createElement('input');
+			newInput.type = 'text';
+			newInput.name = 'item_name[]';
+			itemFields.appendChild(newInput);
+								}
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>program2</title>
+</head>
+<body>
+    <h1>Price comparison program</h1>
+	<form action="/program2_1" method="post">
+	Please input the no. of store you want to find 
+	<br>
+	(type "0" if you want to compare with all store that default to be compare)
+	<br>
+	<input type="text" name="noOfS">
+	<br>
+	    <div id="storeInputs">
+            <!-- Store input fields will be dynamically added here -->
+        </div>
+	Please input the store name
+	<br>
+	<input type="text" name="store">
+	<br>
+	And please input the name of the item that you want to do the price comparison
+	<br>
+	<input type="text" name="item_name">
+	<br>
+	<input type="submit" value="Run Program">
+    </form>
+	<script>
+        function generateStoreInputs() {
+            const numStores = parseInt(document.getElementById("noOfS").value);
+            const storeInputsContainer = document.getElementById("storeInputs");
+            storeInputsContainer.innerHTML = ""; // Clear existing inputs
+
+            for (let i = 0; i < numStores; i++) {
+                const storeInput = document.createElement("input");
+                storeInput.type = "text";
+                storeInput.name = `store${i + 1}`; // Unique name for each store input
+                storeInputsContainer.appendChild(storeInput);
+                storeInputsContainer.appendChild(document.createElement("br"));
+            }
+        }
+
+        // Initial call to generate inputs based on the default value
+        generateStoreInputs();
+    </script>
+</body>
+</html>
+<script>
+    function validateForm() {
+        var x = document.forms["myForm"]["fname"].value;
+        if (x === "") {
+            alert("Name must be filled out");
+            return false;
+        }
+    }
+</script>

@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>program2</title>
+</head>
+<body>
+    <h1>Price comparison program</h1>
+	<form action="/program2" method="post">
+	Please input the no. of store you want to find 
+	<br>
+	(type "0" if you want to compare with all store that default to be compare)
+	<br>
+	(Leave empty if you want to compare targeted store
+	<br>
+	<input type="text" name="noOfS">
+	<br>
+	    <div id="storeInputs">
+            <!-- Store input fields will be dynamically added here -->
+        </div>
+	Please input the store name
+	<br>
+	<div id="itemFields">
+        <input type="text" name="store">
+    </div>
+    <button type="button" onclick="addItemField()">Add another item</button>
+	<br>
+	And please input the name of the item that you want to do the price comparison
+	<br>
+	<input type="text" name="item_name">
+	<br>
+	<input type="submit" value="Run Program">
+    </form>
+	<script>
+		function addItemField() {
+			var itemFields = document.getElementById('itemFields');
+			var newInput = document.createElement('input');
+			newInput.type = 'text';
+			newInput.name = 'store';
+			itemFields.appendChild(newInput);
+								}
+	</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<html>
+<head>
+	<title> A1 index page</title>
+	<style>
+		body	{
+					font-family: Verdana, Arial, sans-serif;
+				
+				}
+	    .banner {
+			width:	100%;
+			height:	15%;
+			display:	flex;
+			justify-content:	center;
+			align-items:	center;
+			font-size:30px;
+			background-color: black;
+			color:	gold;
+				}
+		.bottombanner	{
+							width:	100%;
+							height:	3%;
+							display:	flex;
+							justify-content:	center;
+							align-item:	center;
+							font-size:	25px;
+							background-color:	gray;
+							color:	white;
+						}
+		.container {
+						display:	flex;
+						width:	100%;
+						height:	82%;
+					}
+		.nav{
+				background-color:	gray;
+				height:	100%;
+				width:	15%;
+				border-bottom:	5px solid black;
+			}
+        img {
+				width:	90%;
+				height: 300px;
+				border-radius:	5%;
+				border: 5px solid #000;
+				padding:	6px;
+				animation:	colorchange 1s infinite;
+				position:	relative;					
+				top:	6px;
+				bottom:	6px;
+				left:	2px;
+				right:	2px;
+			}
+		img:hover	{
+						border: 5px solid yellow;
+						border-radius:	5%;
+						position:	relative;
+						bottom:	3px;
+						right:	3px;
+					}
+        @keyframes colorchange {
+									0% {background-color: 	yellow;}
+									25% {background-color: 	purple;}
+									50% {background-color: 	maroon;}
+									75% {background-color: 	green;}
+									100% {background-color: lightblue;}
+								}
+		.home	{
+					width:	75%;
+					height:	100%;
+				}
+		.homeframe	{
+						width:	100%;
+						height:	100%;
+					}
+		.button {
+					transition-duration: 0.4s;
+					width:	90%;
+					height:	50px;
+					font-size: 20px;
+					margin:	10px;
+					background-color:	#A04;
+					color: white;
+				}
+
+		.button:hover 	{
+						color: cyan;
+						}
+		.list	{
+				}
+				
+		
+	</style>
+</head>
+
+<body>
+
+<div class="banner">Smart fridge system</div>
+<div class="container">
+	<div class="nav">
+		<div class=list>
+		<a href='/main' target="content-frame"><button class="button">Home</button></a>
+		<br>
+		<a href="/stock" target="content-frame"><button class="button">Stock</button></a>
+		<br>
+		<a href="/program1" target="content-frame"><button class="button">Price finding</button></a>
+		<br>
+		<a href="/program2" target="content-frame"><button class="button">Price comparison</button></a>
+		<br>
+		<a href="/receive_photo" target="content-frame"><button class="button">CAM</button></a>
+		</div>
+	</div>
+	<div class="home">
+	<iframe src='/main' name="content-frame" class="homeframe"></iframe>
+	</div>
+</div>
+
+
+<div class="bottombanner">&copy; March 2024 - Group 3</div>
+
+</body>
+</html>

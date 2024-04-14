@@ -1,0 +1,26 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detection Result</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detection Results</h1>
+    <!-- Display the image with detected objects -->
+    <div>
+        <img src="{{ url_for('static', filename='detections.jpg') }}" alt="Detected Image">
+    </div>
+    <!-- Loop through the results and display each detected object and its score -->
+    <ul>
+        {% for result in results %}
+            <li>{{ result.entity }}: {{ result.score }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

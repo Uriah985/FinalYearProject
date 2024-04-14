@@ -1,0 +1,36 @@
+<html>
+<body>
+
+<h2>Dynamic Input Fields</h2>
+
+<p>Enter a number and click the button to generate that many text input fields:</p>
+
+<input type="number" id="numFields" value="3">
+<button onclick="generateFields()">Generate</button>
+
+<div id="inputFields"></div>
+
+<script>
+function generateFields() {
+  // Get the number of fields to generate
+  var numFields = document.getElementById("numFields").value;
+
+  // Get the div to hold the fields
+  var container = document.getElementById("inputFields");
+
+  // Clear the div
+  container.innerHTML = "";
+
+  // Generate the fields
+  for (var i = 0; i < numFields; i++) {
+    var input = document.createElement("input");
+    input.type = "text";
+    container.appendChild(input);
+    // Add a line break after each input field
+    container.appendChild(document.createElement("br"));
+  }
+}
+</script>
+
+</body>
+</html>
