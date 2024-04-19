@@ -2,13 +2,14 @@
 import flask
 from objectdetection_finalversion import run_detector_withDefinedModel
 from commend_delect import price_finder, compare
+import os
 #compare(noOfS, item_name, store):
 #price_finder(address, no, item_name)
 dp1 = 'web.html'
 dp2 = 'web2.html'
 dp3 = 'web3.html'
 dp = [dp1, dp2, dp3]
-img_path = "../999cccc/egg2.jpg" ##input image directory u want to detect
+img_path = "/home/ugo/Downloads/20240107_143216.jpg" ##input image directory u want to detect
 
 app = flask.Flask(__name__)
 
@@ -97,9 +98,10 @@ def show_result():
     try:
         # Run object detection and get the image path and results
         #image_path, results = run_detector_withDefinedModel(img_path)
-        image_path, results = run_detector_withDefinedModel("/home/ugo/FinalYearProject/999cccc/egg_test2.png")
+        image_path, results = run_detector_withDefinedModel(img_path)
+        web_image_path = f"/static/detections/{os.path.basename(image_path)}"
         # Render the results in the result.html template
-        return flask.render_template('result.html', image_path=image_path, results=results)
+        return flask.render_template('result.html', image_path=web_image_path, results=results)
     except Exception as e:
         # Handle exceptions and render an error template if needed
         return flask.render_template('error.html', error=str(e))

@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 import tempfile
 from six.moves.urllib.request import urlopen
 from six import BytesIO
-
+import time
 # For drawing onto the image.
 import numpy as np
 from PIL import Image
@@ -177,7 +177,7 @@ Load a public image from Open Images v4, save locally, and display.
 * **ssd+mobilenet V2**: small and fast.
 """
 
-module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
+module_handle = "https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
 detector = hub.load(module_handle).signatures['default']
 
 
@@ -185,6 +185,12 @@ def load_img(path):
   img = tf.io.read_file(path)
   img = tf.image.decode_jpeg(img, channels=3)
   return img
+
+def get_base_path():
+  current_file_path = os.path.abspath(__file__)
+  base_path = os.path.dirname(current_file_path)
+  return base_path
+
 
 def run_detector(detector, path):
   img = load_img(path)
@@ -210,17 +216,29 @@ def run_detector(detector, path):
         # If so, print the corresponding 'detection_class_entities' element
         print(entity)
 
-def save_detected_image(image_array, output_path='/home/ugo/testHTML/static/detections.jpg'):
-    # Save the image to the static directory
-    directory = os.path.dirname(output_path)
-    if not os.path.exists(directory):
-      os.makedirs(directory)
 
-    image = Image.fromarray(image_array)
-    image.save(output_path)
-   
+
+def save_detected_image(image_array, output_path='detections.jpg'):
+    # Append a timestamp to the filename to prevent caching
+    base_path = get_base_path()
+
+    timestamp = int(time.time())
+    base, ext = os.path.splitext(output_path)
+    new_output_path = f"{base}_{timestamp}{ext}"
+
+    # Ensure the directory is within the 'static' folder
+    static_dir = os.path.join(base_path, 'static/detections')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+    full_path = os.path.join(static_dir, new_output_path)
     
-    return output_path
+    image = Image.fromarray(image_array)
+    image.save(full_path)
+    
+    
+    
+    return '/' + full_path  # Return path relative to the Flask app
 
 def run_detector2(detector, path):
     img = load_img(path)
@@ -241,7 +259,7 @@ def run_detector2(detector, path):
     # Process detected entities with scores higher than 0.3
     result_list = [{'entity': entity.decode('utf-8'), 'score': float(score)}
                    for entity, score in zip(result['detection_class_entities'], result['detection_scores'])
-                   if score > 0.3]
+                   if score > 0.1]
 
     # Return the image path and the detection results
     return image_path, result_list
@@ -252,6 +270,6 @@ def run_detector_withDefinedModel(Path):
 
 
 
-
+#run_detector_withDefinedModel("/home/ugo/Downloads/egg_test1.jpg")
 
 
